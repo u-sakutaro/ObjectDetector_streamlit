@@ -8,12 +8,14 @@ import os
 from PIL import Image
 import sys
 import time
+import json
 
+with open('secret.json') as f:
+    secret = json.load(f)
+    KEY = secret['KEY']
+    ENDPOINT = secret['ENDPOINT']
 
-subscription_key = "cb8b5c94042043038fd59ad12a92e9dd"
-endpoint = "https://20220702sak.cognitiveservices.azure.com/"
-
-computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
+computervision_client = ComputerVisionClient(ENDPOINT, CognitiveServicesCredentials(KEY))
 
 def get_tags(filepath):
     local_image = open(filepath, 'rb')
